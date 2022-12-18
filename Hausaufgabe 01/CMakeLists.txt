@@ -3,4 +3,4 @@ project(Hausaufgabe_01 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Hausaufgabe_01 main.c operation.h operation.c stringCutter.h stringCutter.c complexNumberStructure.h)
+add_executable(Hausaufgabe_01 main.c operation.h operation.c stringCutter.h stringCutter.c complexNumberStructure.h displayMenu.h displayMenu.c)

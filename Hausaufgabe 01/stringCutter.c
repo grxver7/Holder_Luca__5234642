@@ -1,30 +1,42 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "complexNumberStructure.h"
-
 double *  stringCutter (char number[]){
     double imaginaryNumber;
     double realNumber;
     char *token;
-    char *token2;
     char **ptr;
     double *numberReturn =malloc(sizeof (double) *2);
+    //char userCorrection;
 
-    token = strtok(number, "+"); //Teil vor plus speichern
-    realNumber = strtod(token, &ptr); //zu double casten
-    numberReturn[0] = realNumber; //in Rückgabeearray speichern, Speicher [0] = reele Zahl
+    if ((strchr(number, '+') == NULL)) {
+        printf("Error, invalid input!");
+        return NULL;
+    }
 
-    token = strtok(NULL, "+"); //Teil hinter plus speichern
-    //printf("%s\n", token);
-    token2 = strtok(token, "i"); //i entfernen
-    //printf("%s\n", token2);
-    imaginaryNumber= strtod(token2, &ptr);
-    numberReturn[1] = imaginaryNumber; //Speicher [0] = imaginäre Zahl
-    //printf("%f %f\n", numberReturn[0], numberReturn[1]);
+    //if does contain invalid inputs
 
+    token = strtok(number, "+"); //first part before '+'
 
-    complexNumber secondNumber;
+    if (strchr(token, 'i') != NULL) { //imaginary number is first number
+        imaginaryNumber = strtod(token, &ptr); //cast to double
+        numberReturn[1] = imaginaryNumber; //storage [1] = imaginary
+
+        token = strtok(NULL, "+"); //part after '+'
+        token = strtok(token, "i"); //cut i
+        realNumber = strtod(token, &ptr);
+        numberReturn[0] = realNumber; //storage [0] = real
+    }
+    else {
+        token=token;
+        realNumber = strtod(token, &ptr);
+        numberReturn[0] = realNumber;
+
+        token = strtok(NULL, "+");
+        token = strtok(token, "i");
+        imaginaryNumber= strtod(token, &ptr);
+        numberReturn[1] = imaginaryNumber;
+    }
 
     return numberReturn;
 }

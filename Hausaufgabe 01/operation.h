@@ -3,6 +3,6 @@
 
 #include "complexNumberStructure.h"
 
-double operation (complexNumber first_Number, complexNumber second_Number);
+double operation (complexNumber first_Number, complexNumber second_Number, char selectedMenu);
 
 #endif //HAUSAUFGABE_01_OPERATION_H

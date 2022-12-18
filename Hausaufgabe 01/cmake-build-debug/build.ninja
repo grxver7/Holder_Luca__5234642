@@ -67,6 +67,12 @@ build CMakeFiles/Hausaufgabe_01.dir/stringCutter.c.obj: C_COMPILER__Hausaufgabe_
   OBJECT_DIR = CMakeFiles\Hausaufgabe_01.dir
   OBJECT_FILE_DIR = CMakeFiles\Hausaufgabe_01.dir
 
+build CMakeFiles/Hausaufgabe_01.dir/displayMenu.c.obj: C_COMPILER__Hausaufgabe_01_Debug C$:/Users/lucah/CLionProjects/Hausaufgabe$ 01/displayMenu.c || cmake_object_order_depends_target_Hausaufgabe_01
+  DEP_FILE = CMakeFiles\Hausaufgabe_01.dir\displayMenu.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles\Hausaufgabe_01.dir
+  OBJECT_FILE_DIR = CMakeFiles\Hausaufgabe_01.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Hausaufgabe_01
@@ -75,7 +81,7 @@ build CMakeFiles/Hausaufgabe_01.dir/stringCutter.c.obj: C_COMPILER__Hausaufgabe_
 #############################################
 # Link the executable Hausaufgabe_01.exe
 
-build Hausaufgabe_01.exe: C_EXECUTABLE_LINKER__Hausaufgabe_01_Debug CMakeFiles/Hausaufgabe_01.dir/main.c.obj CMakeFiles/Hausaufgabe_01.dir/operation.c.obj CMakeFiles/Hausaufgabe_01.dir/stringCutter.c.obj
+build Hausaufgabe_01.exe: C_EXECUTABLE_LINKER__Hausaufgabe_01_Debug CMakeFiles/Hausaufgabe_01.dir/main.c.obj CMakeFiles/Hausaufgabe_01.dir/operation.c.obj CMakeFiles/Hausaufgabe_01.dir/stringCutter.c.obj CMakeFiles/Hausaufgabe_01.dir/displayMenu.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Hausaufgabe_01.dir

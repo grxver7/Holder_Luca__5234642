@@ -26,7 +26,7 @@ void displayMenu(complexNumber first_Number, complexNumber second_Number, comple
                        second_Number.imaginary,  r, phi);
             }
             //polar2
-            if (selectedMenu == 'c') {
+            else if (selectedMenu == 'c') {
                 printf("\nResult: z=(%f%+fi)%c(%f%+fi)=%f*(cos(%f)+i*(sin(%f)",first_Number.real, first_Number.imaginary, operation,second_Number.real,
                        second_Number.imaginary, r, phi, phi);
         }

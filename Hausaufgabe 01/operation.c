@@ -44,7 +44,7 @@ void operation (complexNumber first_Number, complexNumber second_Number, char se
         printf("\nDivision: \nAttention, you divided through 0!!");
     }
     else {
-        printf("Division: ");
+        printf("\nDivision: ");
         displayMenu(first_Number, second_Number, result, selectedMenu, operation);
     }
 }

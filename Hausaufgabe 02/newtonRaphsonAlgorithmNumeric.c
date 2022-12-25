@@ -1,10 +1,10 @@
+#include "newtonRaphsonAlgorithmNumeric.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "newtonRaphsonAlgorithm.h"
 #include "functionF.h"
 #include <math.h>
 
-void newtonRaphsonAlgorithm(double seed) {
+void newtonRaphsonAlgorithmNumeric(double seed) {
     double resultFunction;
     double resultDerivation;
     double result;
@@ -20,7 +20,7 @@ void newtonRaphsonAlgorithm(double seed) {
         double (*getFunction)(double) = &functionF; //pointer to function
         resultFunction=(*getFunction)(resultBefore);
 
-        double (*getDerivation)(double) = &derivationFunctionF;
+        double (*getDerivation)(double) = &derivationFunctionNumeric;
         resultDerivation=(*getDerivation)(resultBefore);
 
         result=result-(resultFunction/resultDerivation);

@@ -16,3 +16,12 @@ double derivationFunctionF (double x) {
     value *= 2;
     return value;
 }
+
+double derivationFunctionNumeric (double x) {
+    double value;
+    double h = pow(10, -8);
+    double (*getFunction)(double) = &functionF;
+    value = (*getFunction)(x+h)-(*getFunction)(x);
+    value = value/h;
+    return value;
+}

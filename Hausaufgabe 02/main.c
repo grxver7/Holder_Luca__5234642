@@ -1,23 +1,28 @@
 #include <stdio.h>
-#include "resultStruct.h"
 #include "newtonRaphsonAlgorithm.h"
+#include "newtonRaphsonAlgorithmNumeric.h"
 
 int main() {
     double seed;
-
-    double a[4]; //pseudo
+    char derivationOutput;
 
     printf("Seed for the algorithm: ");
     scanf("%lf", &seed);
     printf("%lf", seed);
-    newtonRaphsonAlgorithm(seed);
 
-    /*result iterations; //pseudo
-    size_t sizeOfArray = sizeof(a)/sizeof(a[0]);
-    for (int i=0; i < sizeOfArray; i++) {
-        double value = a[i];
-        printf("\nThe %d zero of the function has the value: %f", i, value);
+    printf("Print [a] for the analytic Derivation, \n or [n] for the numeric Derivation: ");
+    scanf("%c", &derivationOutput);
+    printf("%c", derivationOutput);
+    if (derivationOutput=='a') {
+        newtonRaphsonAlgorithm(seed);
     }
-    printf("\nNumber of iterations: %d", iterations);*/
+    else if (derivationOutput=='n') {
+        newtonRaphsonAlgorithmNumeric(seed);
+    }
+    else {
+        printf("Invalid input --> restart calculator");
+        main();
+    }
+
     return 0;
 }

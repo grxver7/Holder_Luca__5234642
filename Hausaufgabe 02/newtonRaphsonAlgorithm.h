@@ -1,4 +1,4 @@
 #ifndef HAUSAUFGABE_02_NEWTONRAPHSONALGORITHM_H
 #define HAUSAUFGABE_02_NEWTONRAPHSONALGORITHM_H
-void newtonRaphsonAlgorithm(double x);
+void newtonRaphsonMethod(double x, char selectedDerivation);
 #endif //HAUSAUFGABE_02_NEWTONRAPHSONALGORITHM_H

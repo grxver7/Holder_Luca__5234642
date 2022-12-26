@@ -1,44 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "newtonRaphsonAlgorithm.h"
-#include "functionF.h"
 #include <math.h>
+#include "functionF.h"
 
-void newtonRaphsonAlgorithm(double seed) {
+void newtonRaphsonMethod(double resultBefore, char selectedDerivation) {
     double resultFunction;
     double resultDerivation;
-    double result;
-    double resultBefore;
-    int stopValue;
+    double result=resultBefore;
+    double stopValue=10e-10;;
     int counter=1;
-    resultBefore = seed;
-    printf("\n%f", resultBefore);
-    stopValue = pow(10, -10);
-    printf("\n%d", stopValue);
 
-    for (int i =1; i <=1000; i++) {
-        double (*getFunction)(double) = &functionF; //pointer to function
+    double (*getDerivation)(double);
+    double (*getFunction)(double) = &functionF; //pointer to functionF
+
+    if (selectedDerivation=='a') {
+        getDerivation = &derivationFunctionAnalytic; //pointer to analytic derivation
+    }
+    else if(selectedDerivation=='n') {
+        getDerivation = &derivationFunctionNumeric; //pointer to numeric derivation
+    }
+    else {
+        printf("\nInvalid input");
+        exit(-1); //invalid input
+    }
+
+    for (int i = 0; i < 1000; i++) {
         resultFunction=(*getFunction)(resultBefore);
-
-        double (*getDerivation)(double) = &derivationFunctionF;
         resultDerivation=(*getDerivation)(resultBefore);
+        result=result-(resultFunction/resultDerivation); //newton raphson method result= x - (x sub n+1)
 
-        result=result-(resultFunction/resultDerivation);
-
-        if (result == resultBefore) {
-            printf("\nThe zero of the function is approximately %fl", result);
+        if (resultFunction==0) {
+            printf("\nThe zero of the function is %f", result);
             printf("\nYou needed %d iterations", counter);
-            exit(0);
+            exit(1); //values equal
+        }
 
-        }
-        if (result-resultBefore <= stopValue) {
-            printf("\nThe zero of the function is approximately %fl", result);
+        if (fabs(result-resultBefore) <= stopValue) {
+            printf("\nThe zero of the function is approximately %f", result);
             printf("\nYou needed %d iterations", counter);
-            exit(0);
+            exit(2); //value almost equal
         }
+        resultBefore=result;
         counter++;
     }
-    printf("\nThe zero of the function is approximately %fl", result);
-    printf("\nYou needed %d iterations", counter);
-    exit(0);
+    printf("\nThe zero of the function is approximately %f", result);
+    printf("\nYou stopped with %d iterations", counter);
+    exit(3); //reached limit of iterations
 }

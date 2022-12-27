@@ -2,24 +2,21 @@
 #include "functionF.h"
 
 double functionF (double x) {
-    double value;
-    value = x-3;
-    value = pow(value, 2);
-    return value;
+    x = x-3;
+    x = pow(x, 2);
+    return x;
 }
 
 double derivationFunctionAnalytic (double x) {
-    double value;
-    value = x-3;
-    value *= 2;
-    return value;
+    x = x-3;
+    x *= 2;
+    return x;
 }
 
 double derivationFunctionNumeric (double x) {
-    double value;
     double h = pow(10, -8);
     double (*getFunction)(double) = &functionF;
-    value = (*getFunction)(x+h)-(*getFunction)(x);
-    value = value/h;
-    return value;
+    x = (*getFunction)(x+h)-(*getFunction)(x);
+    x = x/h;
+    return x;
 }

@@ -1,6 +1,6 @@
 #include <math.h>
 #include "functionF.h"
-
+//Bibliothek Funktionen
 double functionF (double x) {
     x = x-3;
     x = pow(x, 2);

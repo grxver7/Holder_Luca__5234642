@@ -3,6 +3,7 @@
 #include <math.h>
 #include "functionF.h"
 
+//Hauptprogramm
 void newtonRaphsonMethod(double resultBefore, char selectedDerivation) {
     double resultFunction;
     double resultDerivation;

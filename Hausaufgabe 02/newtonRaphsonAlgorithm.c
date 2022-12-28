@@ -30,21 +30,22 @@ void newtonRaphsonMethod(double resultBefore, char selectedDerivation) {
         resultDerivation=(*getDerivation)(resultBefore);
         result=result-(resultFunction/resultDerivation); //newton raphson method result= x - (x sub n+1)
 
-        if (resultFunction==0) {
+        if (resultFunction==0) { //values equal
             printf("\nThe zero of the function is %f", result);
             printf("\nYou needed %d iterations", counter);
-            exit(1); //values equal
+            exit(0);
         }
 
-        if (fabs(result-resultBefore) <= stopValue) {
+        if (fabs(result-resultBefore) <= stopValue) { //value almost equal
             printf("\nThe zero of the function is approximately %f", result);
             printf("\nYou needed %d iterations", counter);
-            exit(2); //value almost equal
+            exit(0);
         }
         resultBefore=result;
         counter++;
     }
+    //reached limit of iterations
     printf("\nThe zero of the function is approximately %f", result);
     printf("\nYou stopped with %d iterations", counter);
-    exit(3); //reached limit of iterations
+    exit(0);
 }

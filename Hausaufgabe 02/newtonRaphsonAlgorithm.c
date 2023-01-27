@@ -8,7 +8,7 @@ void newtonRaphsonMethod(double resultBefore, char selectedDerivation) {
     double resultFunction;
     double resultDerivation;
     double result=resultBefore;
-    double stopValue=10e-10;;
+    double stopValue=10e-10;
     int counter=1;
 
     double (*getDerivation)(double);

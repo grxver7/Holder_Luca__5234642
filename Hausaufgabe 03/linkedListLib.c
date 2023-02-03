@@ -126,7 +126,7 @@ void saveList(listElement *start) {
     FILE *pointerToFile;
     char filename[255];
 
-    printf("Please name your file: ");
+    printf("Please name your file [format: NAME.txt]: ");
     scanf("%s", filename);
 
     pointerToFile = fopen(filename, "w");

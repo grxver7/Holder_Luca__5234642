@@ -170,7 +170,7 @@ void loadList(listElement *start) {
     listElement *new;
     listElement *currentElem = start;
     listElement *checkElem = start;
-    int checkID=0;
+    int checkID = 0;
     while (currentElem->nextElem != NULL)
         currentElem = currentElem->nextElem;
 
@@ -214,37 +214,35 @@ void exitFcn(listElement *start) {
 }
 
 void sortList(listElement *start) {
-    /* in progress
-
-    listElement *followingElement;
+/*    listElement *followingElement;
     listElement *previousElement = start;
     listElement *currentElem;
-    listElement *temporaryElem;
     int checkSortList = 1;
+
+    if (start->nextElem == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
 
     while (checkSortList != 0) {
         checkSortList = 0;
-        currentElem=start->nextElem;
+        currentElem = start->nextElem;
         while (currentElem->nextElem != NULL) {
             followingElement = currentElem->nextElem;
-            if (currentElem->id > followingElement->id) {
+            if (currentElem->age > followingElement->age) {
                 previousElement->nextElem = currentElem->nextElem;
-                temporaryElem->nextElem=followingElement->nextElem;
+                currentElem->nextElem = followingElement->nextElem;
                 followingElement->nextElem = currentElem;
-                currentElem->nextElem = temporaryElem->nextElem;
-                free(temporaryElem);
                 checkSortList = 1;
-                printf("\nSwitch");
-            }
-            else {
+            } else {
                 currentElem = currentElem->nextElem;
+                previousElement = previousElement->nextElem;
             }
         }
     }
-    printf("\nList sorted");
-     */
+    printf("\nList sorted\n");
 }
-
+*/
 void stringToLower(char *string) {
 
     printf("\n>>stringToLower fcn is tbd.\n\n");

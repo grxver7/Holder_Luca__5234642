@@ -2,7 +2,7 @@
 #include "functionF.h"
 //Bibliothek Funktionen
 double functionF (double x) {
-    x = x-3;
+    x = x-11;
     x = pow(x, 2);
     return x;
 }

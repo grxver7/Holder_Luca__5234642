@@ -15,8 +15,8 @@ void rhsMSD(double *rhs, double *y) { // mass spring damper
     double v = y[1]; // speed
 
     /*calc derivatives and store in rhs*/
-    rhs[0] = v;
     rhs[1] = -1 * ((d / m) * v + (c / m) * x);
+    rhs[0] = v;
 }
 
 void eulerSettingsMSD(simHandle *handle) {
@@ -31,7 +31,7 @@ void eulerSettingsMSD(simHandle *handle) {
 
     /*get Userinputs*/
     printf("Simtime (in s): \n");
-    handle->simTime = 5;
+    handle->simTime = 50;
     //scanf("%lf", &handle->simTime);
 
     printf("StepSize (in s): \n");
@@ -82,6 +82,7 @@ void eulerForward(simHandle *handle) { // this is called only once
         for (int j = 0; j < numOfStates; j++) {
             /*euler step*/
             handle->stateVec[j] += handle->stepSize * handle->derivStateVec[j];
+            handle->f(handle->derivStateVec, handle->stateVec);
             fprintf(filePointer, "%lf ", handle->stateVec[j]);
         }
         fprintf(filePointer, "\n");

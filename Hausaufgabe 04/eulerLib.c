@@ -4,11 +4,12 @@
 #include "eulerLib.h"
 
 #define NUMOFSTATES 2
+#define aperiodicLimit 2.2
 
 void rhsMSD(double *rhs, double *y) { // mass spring damper
 
     double m = 1.0;  // mass of object
-    double c = 5;    // feder constant
+    double c = 2;    // feder constant
     double d = 0.25; // damper constant
 
     double x = y[0]; // position
@@ -31,38 +32,32 @@ void eulerSettingsMSD(simHandle *handle) {
 
     /*get Userinputs*/
     printf("Simtime (in s): \n");
-    handle->simTime = 50;
-    //scanf("%lf", &handle->simTime);
+    scanf("%lf", &handle->simTime);
 
     printf("StepSize (in s): \n");
-    handle->stepSize = 0.2;
-    //scanf("%lf", &handle->stepSize);
+    scanf("%lf", &handle->stepSize);
 
     printf("position(t = 0): \n");
-    handle->stateVecInit[0] = 1;
-    //scanf("%lf", &handle->stateVecInit[0]);
+    scanf("%lf", &handle->stateVecInit[0]);
 
     printf("speed(v = 0): \n");
-    handle->stateVecInit[1] = 0;
-    //scanf("%lf", &handle->stateVecInit[1]);
+    scanf("%lf", &handle->stateVecInit[1]);
 
 
     /*reserve storage for states and derivatives*/
-
     handle->stateVec = malloc(sizeof(double) * handle->numOfStates);
     handle->derivStateVec = malloc(sizeof(double) * handle->numOfStates);
 
     /*init states and derivatives with zero*/
-
     for (int i = 0; i < handle->numOfStates; i++) {
         handle->stateVec[i] = 0;
         handle->derivStateVec[i] = 0;
     }
 }
 
-void eulerForward(simHandle *handle) { // this is called only once
+void eulerForward(simHandle *handle) {
     int numOfStates = handle->numOfStates;
-    int integratorSteps = (int) ceil(handle->simTime / handle->stepSize); //steps bsp. 50s/0.2=250 steps
+    int integratorSteps = (int) ceil(handle->simTime / handle->stepSize);
     FILE *filePointer = fopen("eulerResults.txt", "w");
 
     if (filePointer == NULL) {
@@ -74,15 +69,16 @@ void eulerForward(simHandle *handle) { // this is called only once
     for (int i = 0; i < numOfStates; i++) {
         handle->stateVec[i] = handle->stateVecInit[i]; //gives stateVec stateVecInit values
     }
-    for (int i = 0; i <= integratorSteps; i++) {
-        /*get derivatives*/
+    fprintf(filePointer, "%lf %lf %lf\n", 0, handle->stateVecInit[0], handle->stateVecInit[1]);
+    for (int i = 1; i <= integratorSteps; i++) {
+
         handle->f(handle->derivStateVec, handle->stateVec);
         fprintf(filePointer, "%lf ", i * handle->stepSize);
 
         for (int j = 0; j < numOfStates; j++) {
             /*euler step*/
-            handle->stateVec[j] += handle->stepSize * handle->derivStateVec[j];
             handle->f(handle->derivStateVec, handle->stateVec);
+            handle->stateVec[j] += handle->stepSize * handle->derivStateVec[j];
             fprintf(filePointer, "%lf ", handle->stateVec[j]);
         }
         fprintf(filePointer, "\n");
@@ -91,10 +87,11 @@ void eulerForward(simHandle *handle) { // this is called only once
 }
 
 void showResultsMSD(simHandle *handle) {
-
-
 /*call gnuplot*/
     FILE *gnuPlotPointer = popen("gnuplot -persistent", "w");
-    fprintf(gnuPlotPointer, "plot 'eulerResults.txt' using 1:2 with lines, 'eulerResults.txt' using 1:3 with lines\n");
+    fprintf(gnuPlotPointer, "set title \"Results of Simulation\"\n");
+    fprintf(gnuPlotPointer, "set xlabel \"time in sec\"\n");
+    fprintf(gnuPlotPointer, "set key on\n");
+    fprintf(gnuPlotPointer, "plot 'eulerResults.txt' using 1:2 with lines title \"position\", 'eulerResults.txt' using 1:3 with lines title \"speed\"\n");
     pclose(gnuPlotPointer);
 }

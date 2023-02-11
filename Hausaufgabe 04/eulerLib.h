@@ -41,7 +41,7 @@ void eulerForward(simHandle *);
     \param[in]  reference to simHandle 
 
 */
-void showResultsMSD(simHandle *);
+void showResultsMSD();
 
 /**
     \DESCRIPTION: initialize simHandle by user defined specs

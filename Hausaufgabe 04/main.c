@@ -8,7 +8,7 @@ int main() {
     simHandle *handle = &myHandle;
     eulerSettingsMSD(handle);
     eulerForward(handle);
-    showResultsMSD(handle);
+    showResultsMSD();
 
     return 0;
 }

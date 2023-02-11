@@ -9,28 +9,23 @@
 void rhsMSD(double *rhs, double *y) { // mass spring damper
 
     double m = 1.0;  // mass of object
-    double c = 2;    // feder constant
+    double c = 5;    // feder constant
     double d = 0.25; // damper constant
 
     double x = y[0]; // position
     double v = y[1]; // speed
 
-    /*calc derivatives and store in rhs*/
     rhs[1] = -1 * ((d / m) * v + (c / m) * x);
     rhs[0] = v;
 }
 
 void eulerSettingsMSD(simHandle *handle) {
-    /*num of states*/
     handle->numOfStates = NUMOFSTATES;
 
-    /*right hand site*/
     handle->f = rhsMSD;
 
-    /*reserve storage for init state vec*/
     handle->stateVecInit = malloc(sizeof(double) * (handle->numOfStates));
 
-    /*get Userinputs*/
     printf("Simtime (in s): \n");
     scanf("%lf", &handle->simTime);
 
@@ -65,18 +60,16 @@ void eulerForward(simHandle *handle) {
         return;
     }
 
-    /*write init states*/
     for (int i = 0; i < numOfStates; i++) {
-        handle->stateVec[i] = handle->stateVecInit[i]; //gives stateVec stateVecInit values
+        handle->stateVec[i] = handle->stateVecInit[i];
     }
-    fprintf(filePointer, "%lf %lf %lf\n", 0, handle->stateVecInit[0], handle->stateVecInit[1]);
+    fprintf(filePointer, "%lf %lf %lf\n", 0.0, handle->stateVecInit[0], handle->stateVecInit[1]);
     for (int i = 1; i <= integratorSteps; i++) {
 
         handle->f(handle->derivStateVec, handle->stateVec);
         fprintf(filePointer, "%lf ", i * handle->stepSize);
 
         for (int j = 0; j < numOfStates; j++) {
-            /*euler step*/
             handle->f(handle->derivStateVec, handle->stateVec);
             handle->stateVec[j] += handle->stepSize * handle->derivStateVec[j];
             fprintf(filePointer, "%lf ", handle->stateVec[j]);
@@ -86,7 +79,7 @@ void eulerForward(simHandle *handle) {
     fclose(filePointer);
 }
 
-void showResultsMSD(simHandle *handle) {
+void showResultsMSD() {
 /*call gnuplot*/
     FILE *gnuPlotPointer = popen("gnuplot -persistent", "w");
     fprintf(gnuPlotPointer, "set title \"Results of Simulation\"\n");

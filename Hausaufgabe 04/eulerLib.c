@@ -4,7 +4,7 @@
 #include "eulerLib.h"
 
 #define NUMOFSTATES 2
-#define aperiodicLimit 2.2
+#define aperiodicLimit 2.2 //Task 2
 
 void rhsMSD(double *rhs, double *y) { // mass spring damper
 

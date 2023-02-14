@@ -4,13 +4,13 @@
 #include "eulerLib.h"
 
 #define NUMOFSTATES 2
-#define aperiodicLimit 2.2 //Task 2
+#define aperiodicLimit 3 //Task 2
 
 void rhsMSD(double *rhs, double *y) { // mass spring damper
 
     double m = 1.0;  // mass of object
-    double c = 5;    // feder constant
-    double d = 0.25; // damper constant
+    double c = 2;    // feder constant
+    double d = 3; // damper constant
 
     double x = y[0]; // position
     double v = y[1]; // speed
@@ -77,6 +77,8 @@ void eulerForward(simHandle *handle) {
         fprintf(filePointer, "\n");
     }
     fclose(filePointer);
+    free(handle->stateVec);
+    free(handle->derivStateVec);
 }
 
 void showResultsMSD() {

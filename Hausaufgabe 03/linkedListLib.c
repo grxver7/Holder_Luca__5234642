@@ -241,8 +241,9 @@ void sortList(listElement *start) {
         }
     }
     printf("\nList sorted\n");
+    */
 }
-*/
+
 void stringToLower(char *string) {
 
     printf("\n>>stringToLower fcn is tbd.\n\n");

@@ -26,16 +26,16 @@ void eulerSettingsMSD(simHandle *handle) {
 
     handle->stateVecInit = malloc(sizeof(double) * (handle->numOfStates));
 
-    printf("Simtime (in s): \n");
+    printf("Time of simulation (in s): \n");
     scanf("%lf", &handle->simTime);
 
-    printf("StepSize (in s): \n");
+    printf("Step size (in s): \n");
     scanf("%lf", &handle->stepSize);
 
-    printf("position(t = 0): \n");
+    printf("Position(t = 0): \n");
     scanf("%lf", &handle->stateVecInit[0]);
 
-    printf("speed(v = 0): \n");
+    printf("Speed(v = 0): \n");
     scanf("%lf", &handle->stateVecInit[1]);
 
 

@@ -39,11 +39,9 @@ void eulerSettingsMSD(simHandle *handle) {
     scanf("%lf", &handle->stateVecInit[1]);
 
 
-    /*reserve storage for states and derivatives*/
     handle->stateVec = malloc(sizeof(double) * handle->numOfStates);
     handle->derivStateVec = malloc(sizeof(double) * handle->numOfStates);
 
-    /*init states and derivatives with zero*/
     for (int i = 0; i < handle->numOfStates; i++) {
         handle->stateVec[i] = 0;
         handle->derivStateVec[i] = 0;
@@ -59,10 +57,10 @@ void eulerForward(simHandle *handle) {
         printf("Error opening file!\n");
         return;
     }
-
     for (int i = 0; i < numOfStates; i++) {
         handle->stateVec[i] = handle->stateVecInit[i];
     }
+
     fprintf(filePointer, "%lf %lf %lf\n", 0.0, handle->stateVecInit[0], handle->stateVecInit[1]);
     for (int i = 1; i <= integratorSteps; i++) {
 
@@ -82,11 +80,11 @@ void eulerForward(simHandle *handle) {
 }
 
 void showResultsMSD() {
-/*call gnuplot*/
     FILE *gnuPlotPointer = popen("gnuplot -persistent", "w");
     fprintf(gnuPlotPointer, "set title \"Results of Simulation\"\n");
     fprintf(gnuPlotPointer, "set xlabel \"time in sec\"\n");
     fprintf(gnuPlotPointer, "set key on\n");
-    fprintf(gnuPlotPointer, "plot 'eulerResults.txt' using 1:2 with lines title \"position\", 'eulerResults.txt' using 1:3 with lines title \"speed\"\n");
+    fprintf(gnuPlotPointer,
+            "plot 'eulerResults.txt' using 1:2 with lines title \"position\", 'eulerResults.txt' using 1:3 with lines title \"speed\"\n");
     pclose(gnuPlotPointer);
 }

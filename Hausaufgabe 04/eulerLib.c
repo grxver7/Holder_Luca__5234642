@@ -53,7 +53,7 @@ void eulerSettingsMSD(simHandle *handle) {
 void eulerForward(simHandle *handle) {
     int numOfStates = handle->numOfStates;
     int integratorSteps = (int) ceil(handle->simTime / handle->stepSize);
-    FILE *filePointer = fopen("eulerResults.txt", "w");
+    FILE *filePointer = fopen("simData.txt", "w");
 
     if (filePointer == NULL) {
         printf("Error opening file!\n");
@@ -87,7 +87,7 @@ void showResultsMSD() {
     fprintf(gnuPlotPointer, "set xlabel \"time in sec\"\n");
     fprintf(gnuPlotPointer, "set key on\n");
     fprintf(gnuPlotPointer,
-            "plot 'eulerResults.txt' using 1:2 with lines title \"position\", 'eulerResults.txt' using 1:3 with lines title \"speed\"\n");
+            "plot 'simData.txt' using 1:2 with lines title \"position\", 'eulerResults.txt' using 1:3 with lines title \"speed\"\n");
     pclose(gnuPlotPointer);
 }
 

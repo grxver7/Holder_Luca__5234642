@@ -164,7 +164,7 @@ void loadList(listElement *start) {
 
     pointerToFile = fopen(filename, "r");
     if (pointerToFile == NULL) {
-        printf("\nUnable to write in file\n");
+        printf("\nUnable to load file\n");
         return;
     }
     listElement *new;

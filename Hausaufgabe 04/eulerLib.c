@@ -32,12 +32,14 @@ void eulerSettingsMSD(simHandle *handle) {
     printf("Step size (in s): \n");
     scanf("%lf", &handle->stepSize);
 
+
     printf("Position(t = 0): \n");
     scanf("%lf", &handle->stateVecInit[0]);
 
     printf("Speed(v = 0): \n");
     scanf("%lf", &handle->stateVecInit[1]);
 
+    errorHandlingInput(handle);
 
     handle->stateVec = malloc(sizeof(double) * handle->numOfStates);
     handle->derivStateVec = malloc(sizeof(double) * handle->numOfStates);
@@ -87,4 +89,16 @@ void showResultsMSD() {
     fprintf(gnuPlotPointer,
             "plot 'eulerResults.txt' using 1:2 with lines title \"position\", 'eulerResults.txt' using 1:3 with lines title \"speed\"\n");
     pclose(gnuPlotPointer);
+}
+
+void errorHandlingInput (simHandle *handle) {
+    if (handle->simTime<=0) {
+        printf("In a time of 0, the object can't move!\n");
+        printf("Your object has the position %lf and speed %lf \n", handle->stateVecInit[0], handle->stateVecInit[1]);
+        exit(0);
+    }
+    if (handle->stepSize<=0) {
+        printf("Warning, step size <= 0 isn't allowed!");
+        exit(-1);
+    }
 }

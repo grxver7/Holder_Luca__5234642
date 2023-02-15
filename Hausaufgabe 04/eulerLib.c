@@ -21,9 +21,7 @@ void rhsMSD(double *rhs, double *y) { // mass spring damper
 
 void eulerSettingsMSD(simHandle *handle) {
     handle->numOfStates = NUMOFSTATES;
-
     handle->f = rhsMSD;
-
     handle->stateVecInit = malloc(sizeof(double) * (handle->numOfStates));
 
     printf("Time of simulation (in s): \n");
@@ -31,7 +29,6 @@ void eulerSettingsMSD(simHandle *handle) {
 
     printf("Step size (in s): \n");
     scanf("%lf", &handle->stepSize);
-
 
     printf("Position(t = 0): \n");
     scanf("%lf", &handle->stateVecInit[0]);

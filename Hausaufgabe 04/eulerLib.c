@@ -10,7 +10,7 @@ void rhsMSD(double *rhs, double *y) { // mass spring damper
 
     double m = 1.0;  // mass of object
     double c = 2;    // feder constant
-    double d = 3; // damper constant
+    double d = APERIODICLIMIT; // damper constant
 
     double x = y[0]; // position
     double v = y[1]; // speed

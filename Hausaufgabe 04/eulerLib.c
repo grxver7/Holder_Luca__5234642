@@ -4,7 +4,7 @@
 #include "eulerLib.h"
 
 #define NUMOFSTATES 2
-#define aperiodicLimit 3 //Task 2
+#define APERIODICLIMIT 3 //Task 2
 
 void rhsMSD(double *rhs, double *y) { // mass spring damper
 
@@ -84,7 +84,7 @@ void showResultsMSD() {
     fprintf(gnuPlotPointer, "set xlabel \"time in sec\"\n");
     fprintf(gnuPlotPointer, "set key on\n");
     fprintf(gnuPlotPointer,
-            "plot 'simData.txt' using 1:2 with lines title \"position\", 'eulerResults.txt' using 1:3 with lines title \"speed\"\n");
+            "plot 'simData.txt' using 1:2 with lines title \"position\", 'simData.txt' using 1:3 with lines title \"speed\"\n");
     pclose(gnuPlotPointer);
 }
 
